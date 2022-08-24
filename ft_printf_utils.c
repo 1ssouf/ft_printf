@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajordan- <ajordan-@student.42urduliz.com>  +#+  +:+       +#+        */
+/*   By: ialousse <ialousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 13:40:58 by ajordan-          #+#    #+#             */
-/*   Updated: 2021/10/19 14:53:21 by ajordan-         ###   ########.fr       */
+/*   Updated: 2022/08/24 13:45:20 by ialousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include "libft.h"
 #include <stdlib.h>
 
 void	ft_putstr(char *str)
@@ -26,38 +25,54 @@ void	ft_putstr(char *str)
 	}
 }
 
-int	ft_printstr(char *str)
+void	ft_putchar_fd(char c, int fd)
+{
+	write (fd, &c, 1);
+}
+
+static int	ft_len(long int nb)
 {
 	int	i;
 
 	i = 0;
-	if (str == NULL)
+	if (nb == 0)
+		return (1);
+	if (nb < 0)
 	{
-		ft_putstr("(null)");
-		return (6);
+		nb *= -1;
+		i++;
 	}
-	while (str[i])
+	while (nb != 0)
 	{
-		write(1, &str[i], 1);
+		nb /= 10;
 		i++;
 	}
 	return (i);
 }
 
-int	ft_printnbr(int n)
+char	*ft_itoa(int n)
 {
-	int		len;
-	char	*num;
+	long int	nbr;
+	char		*str;
+	size_t		len;
 
-	len = 0;
-	num = ft_itoa(n);
-	len = ft_printstr(num);
-	free(num);
-	return (len);
-}
-
-int	ft_printpercent(void)
-{
-	write(1, "%", 1);
-	return (1);
+	nbr = n;
+	len = ft_len(nbr);
+	str = malloc(sizeof(char) * (len + 1));
+	if (!str)
+		return (NULL);
+	str[len--] = '\0';
+	if (nbr == 0)
+		str[0] = '0';
+	if (nbr < 0)
+	{
+		str[0] = '-';
+		nbr *= -1;
+	}
+	while (nbr > 0)
+	{
+		str[len--] = nbr % 10 + '0';
+		nbr /= 10;
+	}
+	return (str);
 }

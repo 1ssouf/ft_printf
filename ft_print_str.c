@@ -1,27 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_striteri.c                                      :+:      :+:    :+:   */
+/*   ft_print_str.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ialousse <ialousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/15 17:05:48 by ialousse          #+#    #+#             */
-/*   Updated: 2022/07/31 17:50:24 by ialousse         ###   ########.fr       */
+/*   Created: 2022/08/24 13:17:33 by ialousse          #+#    #+#             */
+/*   Updated: 2022/08/24 13:17:55 by ialousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-void	ft_striteri(char *s, void (*f)(unsigned int, char*))
+int	ft_printstr(char *str)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
-	if (!s || !f)
-		return ;
-	while (s[i])
+	if (str == NULL)
 	{
-		f(i, &s[i]);
+		ft_putstr("(null)");
+		return (6);
+	}
+	while (str[i])
+	{
+		write(1, &str[i], 1);
 		i++;
 	}
+	return (i);
 }

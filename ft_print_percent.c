@@ -1,30 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_print_percent.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ialousse <ialousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/14 18:52:42 by ialousse          #+#    #+#             */
-/*   Updated: 2022/07/26 19:13:17 by ialousse         ###   ########.fr       */
+/*   Created: 2022/08/24 13:19:41 by ialousse          #+#    #+#             */
+/*   Updated: 2022/08/24 13:19:57 by ialousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-void	ft_putstr_fd(char *s, int fd)
+int	ft_printpercent(void)
 {
-	int	i;
-
-	i = 0;
-	if (!s)
-		return ;
-	if (s != 0)
-	{
-		while (s[i])
-		{
-			write(fd, &s[i], 1);
-			i++;
-		}
-	}
+	write(1, "%", 1);
+	return (1);
 }
